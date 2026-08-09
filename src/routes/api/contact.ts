@@ -5,15 +5,12 @@ export const Route = createFileRoute("/api/contact")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        console.log("CONTACT API: Request received");
-        console.log(
-          "CONTACT API: API key exists:",
-          Boolean(process.env.RESEND_API_KEY),
-        );
-
         try {
-          const { name, email, message } = await request.json();
+          // Parse request body safely
+          const body = await request.text();
+          const { name, email, message } = JSON.parse(body);
 
+          // Validate fields
           if (!name || !email || !message) {
             return Response.json(
               {
@@ -23,50 +20,57 @@ export const Route = createFileRoute("/api/contact")({
             );
           }
 
-          console.log("CONTACT API: Creating Resend client");
+          // Check API key
+          const apiKey = process.env.RESEND_API_KEY;
 
-          const resend = new Resend(process.env.RESEND_API_KEY);
+          if (!apiKey) {
+            console.error("RESEND_API_KEY is missing");
 
-          console.log("CONTACT API: Sending email");
+            return Response.json(
+              {
+                error: "Server configuration error.",
+              },
+              { status: 500 },
+            );
+          }
+
+          const resend = new Resend(apiKey);
 
           const { data, error } = await resend.emails.send({
             from: "Rishant Portfolio <onboarding@resend.dev>",
             to: ["rikushwaha78.rk@gmail.com"],
             replyTo: email,
             subject: `New portfolio message from ${name}`,
-            text: `Name: ${name}
+            text: `
+Name: ${name}
 Email: ${email}
 
 Message:
-${message}`,
+${message}
+            `,
           });
 
           if (error) {
-            console.error("CONTACT API: Resend error:", error);
+            console.error("Resend error:", error);
 
             return Response.json(
               {
                 error: "Failed to send message.",
-                details: error.message,
               },
               { status: 500 },
             );
           }
-
-          console.log("CONTACT API: Email sent successfully");
 
           return Response.json({
             success: true,
             data,
           });
         } catch (error) {
-          console.error("CONTACT API: Error:", error);
+          console.error("Contact form error:", error);
 
           return Response.json(
             {
               error: "Something went wrong while sending the message.",
-              details:
-                error instanceof Error ? error.message : "Unknown error",
             },
             { status: 500 },
           );
