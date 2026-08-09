@@ -12,11 +12,11 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: "ibm-skillsbuild",
-    role: "AI / ML Intern",
-    org: "IBM SkillsBuild — Project-Based Internship",
-    duration: "2025",
+    role: "Project-Based AI / ML Intern",
+    org: "IBM SkillsBuild",
+    duration: "June 2026 — Present",
     description:
-      "Worked on the Player Engagement & Retention Analytics System, using player behavior data to analyze engagement patterns and predict potential player churn. Built the data preprocessing, machine learning, evaluation, and retention simulation workflow.",
+      "Working on the Player Engagement & Retention Analytics System, using player behavior data to analyze engagement patterns and predict potential player churn. Built the data preprocessing, machine learning, evaluation, and retention simulation workflow.",
     technologies: [
       "Python",
       "Scikit-learn",
@@ -25,15 +25,15 @@ export const experiences: Experience[] = [
       "Jupyter",
     ],
     achievement:
-      "Built and deployed a machine learning-based player retention analytics system with an interactive web interface.",
-    status: "completed",
+      "Built a machine learning-based player retention analytics system with an interactive web interface.",
+    status: "active",
   },
 
   {
     id: "amd-hackathon",
     role: "Backend Developer / Participant",
-    org: "AMD Developer Hackathon",
-    duration: "2025",
+    org: "AMD Developer Hackathon (ACT II)",
+    duration: "2026",
     description:
       "Worked on the backend for an AI Video Captioning Agent that processes video content, extracts frames using OpenCV, and generates contextual captions through a multimodal AI workflow.",
     technologies: [
@@ -52,22 +52,41 @@ export const experiences: Experience[] = [
     id: "freelance-unity",
     role: "Freelance Unity Game Developer",
     org: "Independent Client Project",
-    duration: "2024 — Present",
+    duration: "Jan 2026 — March 2026",
     description:
-      "Developed gameplay systems and multiplayer functionality for a Unity-based client project, including player movement, shooting, health mechanics, and networked gameplay using Photon PUN.",
+      "Independently developed a multiplayer FPS game using Unity, C#, and Photon PUN, implementing networking, player movement, shooting, and health systems.",
     technologies: ["Unity", "C#", "Photon PUN", "Multiplayer", "Git"],
     achievement:
-      "Built the core multiplayer gameplay systems and delivered a playable client project.",
-    status: "active",
+      "Collaborated to deliver two client game projects under a freelance contract.",
+    status: "completed",
+  },
+
+  {
+    id: "hydrology-it",
+    role: "IT Intern",
+    org: "Office of Hydrology & Meteorology, Pokhara",
+    duration: "June 2025 — July 2025",
+    description:
+      "Supported daily IT operations by troubleshooting desktops and peripherals, assisting with LAN setup, and configuring organizational devices.",
+    technologies: [
+      "Hardware Troubleshooting",
+      "Networking",
+      "LAN",
+      "Device Configuration",
+      "IT Support",
+    ],
+    achievement:
+      "Provided hands-on technical support for organizational IT systems and network-connected devices.",
+    status: "completed",
   },
 
   {
     id: "inf-it",
     role: "IT Intern",
     org: "International Nepal Fellowship — Green Pastures Hospital",
-    duration: "2025",
+    duration: "June 2024 — July 2024",
     description:
-      "Supported IT operations by troubleshooting software and hardware issues, assisting with networking and device setup, and learning enterprise tools including Active Directory, Windows Server, Microsoft Entra ID, Azure, and virtual machines.",
+      "Supported IT operations by troubleshooting PCs, printers, and projectors, configuring LAN devices and media converters, and gaining hands-on experience with Active Directory, Azure, and Windows Server.",
     technologies: [
       "Windows Server",
       "Active Directory",
@@ -77,7 +96,7 @@ export const experiences: Experience[] = [
       "Oracle VM",
     ],
     achievement:
-      "Gained hands-on experience troubleshooting real organizational IT systems while improving communication and technical support skills.",
+      "Gained hands-on experience supporting real organizational IT systems and troubleshooting hardware, software, and network-related issues.",
     status: "completed",
   },
 ];
