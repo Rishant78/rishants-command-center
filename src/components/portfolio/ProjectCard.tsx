@@ -53,21 +53,21 @@ export function ProjectCard({
         transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
         transformStyle: "preserve-3d",
       }}
-      className="group glass clip-hud flex flex-col overflow-hidden transition-[border-color,box-shadow] duration-300 hover:border-cyan/60 hover:shadow-[var(--glow-cyan)]"
+      className="group glass flex flex-col overflow-hidden rounded-2xl transition-[border-color,box-shadow,transform] duration-300 hover:border-cyan/35 hover:shadow-[0_8px_30px_rgba(6,182,212,0.08)] hover:-translate-y-1 bg-card/45"
     >
       {/* Project Video */}
-      <div className="relative aspect-video w-full overflow-hidden bg-black">
+      <div className="relative aspect-video w-full overflow-hidden bg-black/60 border-b border-border">
         <iframe
           src={getVideoUrl(project.videoUrl)}
           title={`${project.title} showcase video`}
-          className="absolute inset-0 h-full w-full border-0"
+          className="absolute inset-0 h-full w-full border-0 animate-fade-in"
           allow="autoplay; fullscreen"
           allowFullScreen
         />
 
         {/* Project Category */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-background/90 to-transparent p-3 pt-8">
-          <span className="font-mono text-[10px] tracking-[0.2em] text-cyan uppercase">
+        <div className="absolute top-3 left-3 z-10">
+          <span className="bg-background/80 backdrop-blur-md border border-border px-2.5 py-0.75 rounded-full font-mono text-[9px] tracking-[0.1em] text-cyan uppercase font-semibold">
             {project.category}
           </span>
         </div>
@@ -75,7 +75,7 @@ export function ProjectCard({
 
       {/* Project Information */}
       <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <h3 className="font-display text-lg font-bold">
+        <h3 className="font-sans text-lg font-bold text-foreground">
           {project.title}
         </h3>
 
@@ -88,7 +88,7 @@ export function ProjectCard({
           {project.tech.map((tech) => (
             <span
               key={tech}
-              className="border border-cyan/30 bg-cyan/8 px-2 py-0.5 font-mono text-[10px] text-cyan"
+              className="border border-cyan-500/20 bg-cyan-500/5 px-2.5 py-0.5 rounded-full font-mono text-[9px] text-cyan/95"
             >
               {tech}
             </span>
@@ -96,18 +96,18 @@ export function ProjectCard({
         </div>
 
         {/* Project Details */}
-        <dl className="mt-5 space-y-3 border-t border-border pt-4 text-sm">
+        <dl className="mt-5 space-y-3.5 border-t border-border pt-4 text-sm">
           {[
             ["Challenges", project.challenges],
             ["My Contribution", project.contribution],
             ["Lessons Learned", project.lessons],
           ].map(([label, value]) => (
             <div key={label}>
-              <dt className="font-mono text-[10px] tracking-[0.2em] text-violet uppercase">
+              <dt className="font-mono text-[9px] tracking-[0.1em] text-violet uppercase font-semibold">
                 {label}
               </dt>
 
-              <dd className="mt-1 text-muted-foreground">
+              <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">
                 {value}
               </dd>
             </div>

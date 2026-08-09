@@ -17,19 +17,19 @@ export function ResumeSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="glass clip-hud scanlines relative overflow-hidden p-6 sm:p-10"
+        className="glass relative overflow-hidden p-6 sm:p-10 rounded-2xl border border-border bg-card/45"
       >
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <div className="font-mono text-[10px] tracking-[0.3em] text-cyan uppercase">
-              Dossier // {profile.name}
+            <div className="font-mono text-[9px] tracking-[0.2em] text-cyan uppercase">
+              Credentials // {profile.name}
             </div>
 
-            <h3 className="mt-3 font-display text-2xl font-bold">
+            <h3 className="mt-3 font-sans text-2xl font-bold text-foreground">
               Curriculum Vitae
             </h3>
 
-            <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
+            <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:text-base leading-relaxed">
               My resume is available for download or inline review, including
               my education, technical skills, projects, and experience.
             </p>
@@ -38,13 +38,13 @@ export function ResumeSection() {
               {profile.stats.map((s) => (
                 <div
                   key={s.label}
-                  className="border border-border bg-surface-2 p-3"
+                  className="rounded-lg border border-border bg-surface-2 p-3.5 hover:border-cyan/20 transition-colors"
                 >
-                  <dt className="font-mono text-[9px] tracking-[0.2em] text-muted-foreground uppercase">
+                  <dt className="font-mono text-[9px] tracking-[0.15em] text-muted-foreground uppercase">
                     {s.label}
                   </dt>
 
-                  <dd className="mt-1 font-display text-xs font-bold text-cyan">
+                  <dd className="mt-1 font-sans text-xs font-bold text-cyan">
                     {s.value}
                   </dd>
                 </div>

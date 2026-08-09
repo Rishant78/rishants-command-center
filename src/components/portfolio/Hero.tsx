@@ -31,17 +31,17 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 border border-cyan/40 bg-cyan/10 px-4 py-1.5 font-mono text-[10px] tracking-[0.3em] text-cyan uppercase"
+          className="inline-flex items-center gap-2 border border-emerald-500/20 bg-emerald-500/5 px-3.5 py-1.5 rounded-full font-sans text-[11px] font-medium tracking-wide text-emerald-400"
         >
-          <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-cyan" />
-          System Online
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          Available for new opportunities
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="mt-6 text-4xl leading-tight font-black sm:text-6xl md:text-7xl"
+          className="mt-6 text-4xl leading-tight font-black sm:text-6xl md:text-7.5xl tracking-tight"
         >
           <span className="neon-text">{profile.name}</span>
         </motion.h1>
@@ -50,9 +50,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="mt-5 font-mono text-xs tracking-[0.2em] text-muted-foreground uppercase sm:text-sm"
+          className="mt-5 font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase sm:text-xs"
         >
-          {profile.roles.join(" • ")}
+          {profile.roles.join("  •  ")}
         </motion.p>
 
         <motion.div
@@ -62,7 +62,7 @@ export function Hero() {
           className="mt-10 flex flex-wrap items-center justify-center gap-3"
         >
           <NeonButton size="lg" onClick={() => scrollTo("about")}>
-            Enter Portfolio
+            View My Work
           </NeonButton>
           <NeonLink href={profile.links.resume} download variant="violet" size="lg">
             <Download size={14} /> Download Resume

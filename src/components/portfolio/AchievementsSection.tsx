@@ -5,10 +5,10 @@ import { achievements, totalXp } from "@/data/achievements";
 import { Section } from "./Section";
 
 const rarityStyle: Record<string, string> = {
-  common: "border-border text-foreground/80",
-  rare: "border-azure/50 text-azure",
-  epic: "border-violet/50 text-violet",
-  legendary: "border-cyan/60 text-cyan shadow-[var(--glow-cyan)]",
+  common: "border-border/60 text-foreground/80 bg-card/45",
+  rare: "border-azure/30 text-azure bg-azure/5",
+  epic: "border-violet/30 text-violet bg-violet/5",
+  legendary: "border-cyan/35 text-cyan bg-cyan/5",
 };
 
 function XpCounter({ target }: { target: number }) {
@@ -41,18 +41,18 @@ export function AchievementsSection() {
       title="Achievements"
       subtitle="Unlocked milestones and accumulated experience points."
     >
-      <div className="glass clip-hud mb-8 flex flex-wrap items-center justify-between gap-4 p-5">
+      <div className="glass mb-8 flex flex-wrap items-center justify-between gap-6 p-6 rounded-2xl border border-border bg-card/45">
         <div>
-          <div className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
+          <div className="font-mono text-[9px] tracking-[0.25em] text-muted-foreground uppercase">
             Total XP
           </div>
-          <div className="font-display text-3xl font-black text-cyan">
-            <XpCounter target={totalXp} /> <span className="text-base text-violet">XP</span>
+          <div className="font-sans text-3xl font-black text-cyan mt-1">
+            <XpCounter target={totalXp} /> <span className="text-base text-violet font-semibold">XP</span>
           </div>
         </div>
-        <div className="h-2 w-full max-w-md overflow-hidden bg-muted sm:w-1/2">
+        <div className="h-1.5 w-full max-w-md overflow-hidden bg-muted rounded-full sm:w-1/2">
           <motion.div
-            className="h-full"
+            className="h-full rounded-full"
             style={{ background: "var(--gradient-neon)" }}
             initial={{ width: 0 }}
             whileInView={{ width: "82%" }}
@@ -71,21 +71,21 @@ export function AchievementsSection() {
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
             whileHover={{ y: -6 }}
-            className={`glass clip-hud relative overflow-hidden border p-5 ${rarityStyle[a.rarity]}`}
+            className={`glass relative overflow-hidden border p-6 rounded-2xl transition-all duration-300 hover:border-cyan/35 ${rarityStyle[a.rarity]}`}
           >
             <span className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 animate-sweep bg-gradient-to-r from-transparent via-cyan/12 to-transparent" />
             <div className="flex items-start justify-between gap-3">
-              <Trophy size={20} />
-              <span className="font-mono text-[9px] tracking-[0.25em] uppercase opacity-80">
+              <Trophy size={18} className="text-muted-foreground" />
+              <span className="font-mono text-[9px] tracking-wider uppercase opacity-75">
                 {a.rarity}
               </span>
             </div>
-            <h3 className="mt-3 font-display text-sm font-bold text-foreground">{a.title}</h3>
+            <h3 className="mt-3 font-sans text-sm font-bold text-foreground">{a.title}</h3>
             <p className="mt-2 text-sm text-muted-foreground">{a.description}</p>
-            <div className="mt-4 flex items-center justify-between border-t border-border pt-3 font-mono text-[10px] tracking-[0.2em] uppercase">
-              <span className="text-cyan">+{a.xp} XP</span>
-              <span className="inline-flex items-center gap-1 text-muted-foreground">
-                <Lock size={10} className="opacity-0" /> Unlocked
+            <div className="mt-4 flex items-center justify-between border-t border-border/60 pt-3.5 font-mono text-[10px] tracking-wide">
+              <span className="text-cyan font-semibold">+{a.xp} XP</span>
+              <span className="inline-flex items-center gap-1 text-muted-foreground font-sans font-medium">
+                Unlocked
               </span>
             </div>
           </motion.div>

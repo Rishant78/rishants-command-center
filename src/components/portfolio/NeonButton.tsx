@@ -3,21 +3,21 @@ import { cn } from "@/lib/utils";
 import type { ComponentPropsWithoutRef } from "react";
 
 export const neonButtonVariants = cva(
-  "clip-hud relative inline-flex items-center justify-center gap-2 overflow-hidden px-6 py-3 font-display text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan disabled:opacity-50",
+  "relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg border px-6 py-2.5 font-sans text-xs font-semibold tracking-[0.1em] uppercase transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan disabled:opacity-50",
   {
     variants: {
       variant: {
         primary:
-          "bg-cyan/15 text-cyan neon-border hover:bg-cyan/25 hover:-translate-y-0.5",
+          "border-cyan/30 bg-cyan/10 text-cyan hover:bg-cyan/20 hover:border-cyan/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:-translate-y-0.5",
         violet:
-          "border border-violet/50 bg-violet/15 text-violet hover:bg-violet/25 hover:-translate-y-0.5",
+          "border-violet/30 bg-violet/10 text-violet hover:bg-violet/20 hover:border-violet/50 hover:shadow-[0_0_15px_rgba(139,92,246,0.15)] hover:-translate-y-0.5",
         ghost:
-          "border border-border bg-surface text-foreground hover:border-cyan/60 hover:text-cyan hover:-translate-y-0.5",
+          "border-border bg-surface text-foreground/85 hover:border-cyan/30 hover:text-cyan hover:bg-surface-2 hover:-translate-y-0.5",
       },
       size: {
         default: "",
-        sm: "px-4 py-2 text-[10px]",
-        lg: "px-8 py-4 text-sm",
+        sm: "px-4 py-1.5 text-[10px] tracking-[0.08em]",
+        lg: "px-7 py-3 text-sm tracking-[0.12em]",
       },
     },
     defaultVariants: { variant: "primary", size: "default" },

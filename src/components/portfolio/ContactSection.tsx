@@ -142,12 +142,12 @@ export function ContactSection() {
                         ? undefined
                         : "noreferrer noopener"
                     }
-                    className="glass flex items-center gap-4 p-4 transition-all hover:border-cyan/60 hover:shadow-[var(--glow-cyan)]"
+                    className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card/45 transition-all duration-300 hover:border-cyan/35 hover:shadow-[0_8px_30px_rgba(6,182,212,0.06)] hover:-translate-y-0.5"
                   >
                     {inner}
                   </a>
                 ) : (
-                  <div className="glass flex items-center gap-4 p-4">
+                  <div className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card/45">
                     {inner}
                   </div>
                 )}
@@ -163,7 +163,7 @@ export function ContactSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, delay: 0.1 }}
-          className="glass clip-hud space-y-4 p-6"
+          className="glass space-y-4 p-6 rounded-2xl border border-border bg-card/45"
         >
           {[
             { id: "name", label: "Name", type: "text" },
@@ -172,7 +172,7 @@ export function ContactSection() {
             <div key={f.id}>
               <label
                 htmlFor={f.id}
-                className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground uppercase"
+                className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase"
               >
                 {f.label}
               </label>
@@ -183,7 +183,7 @@ export function ContactSection() {
                 type={f.type}
                 required
                 disabled={sending}
-                className="mt-1.5 w-full border border-input bg-surface-2 px-3 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-cyan focus:shadow-[var(--glow-cyan)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="mt-1.5 w-full rounded-lg border border-border bg-surface-2/40 px-3.5 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan focus:ring-1 focus:ring-cyan/20 disabled:cursor-not-allowed disabled:opacity-60"
               />
             </div>
           ))}
@@ -191,7 +191,7 @@ export function ContactSection() {
           <div>
             <label
               htmlFor="message"
-              className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground uppercase"
+              className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase"
             >
               Message
             </label>
@@ -202,7 +202,7 @@ export function ContactSection() {
               rows={5}
               required
               disabled={sending}
-              className="mt-1.5 w-full resize-none border border-input bg-surface-2 px-3 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-cyan focus:shadow-[var(--glow-cyan)] disabled:cursor-not-allowed disabled:opacity-60"
+              className="mt-1.5 w-full resize-none rounded-lg border border-border bg-surface-2/40 px-3.5 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan focus:ring-1 focus:ring-cyan/20 disabled:cursor-not-allowed disabled:opacity-60"
             />
           </div>
 
@@ -216,12 +216,12 @@ export function ContactSection() {
             {sending ? (
               <>
                 <Loader2 size={14} className="animate-spin" />
-                Transmitting...
+                Sending...
               </>
             ) : sent ? (
               <>
                 <Check size={14} />
-                Transmission Sent
+                Message Sent
               </>
             ) : (
               <>
@@ -234,7 +234,7 @@ export function ContactSection() {
           {sent && (
             <p className="flex items-center gap-2 font-mono text-[10px] text-cyan">
               <Check size={12} />
-              Message successfully transmitted.
+              Message sent successfully.
             </p>
           )}
 

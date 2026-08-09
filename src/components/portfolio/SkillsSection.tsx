@@ -13,7 +13,7 @@ export function SkillsSection() {
     <Section
       id="skills"
       index="04"
-      title="Skill Tree"
+      title="Technical Skills"
       subtitle="Hover or focus a node to reveal the projects where it was deployed."
     >
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -24,11 +24,11 @@ export function SkillsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: bi * 0.05 }}
-            className="glass clip-hud p-5"
+            className="glass p-5 rounded-2xl border border-border bg-card/45"
           >
             <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rotate-45 bg-violet shadow-[var(--glow-violet)]" />
-              <h3 className="font-display text-xs font-bold tracking-[0.2em] text-foreground uppercase">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet" />
+              <h3 className="font-sans text-xs font-bold tracking-widest text-foreground uppercase">
                 {branch.name}
               </h3>
             </div>
@@ -45,10 +45,10 @@ export function SkillsSection() {
                       onMouseLeave={() => setHovered(null)}
                       onFocus={() => setHovered(key)}
                       onBlur={() => setHovered(null)}
-                      className={`w-full border px-3 py-2 text-left text-sm font-semibold transition-all duration-300 ${
+                      className={`w-full border rounded-lg px-3.5 py-2 text-left text-[13px] font-semibold tracking-wide transition-all duration-300 ${
                         open
-                          ? "border-cyan/60 bg-cyan/12 text-cyan shadow-[var(--glow-cyan)]"
-                          : "border-border bg-surface-2 text-foreground/85 hover:border-cyan/40"
+                          ? "border-cyan/40 bg-cyan/10 text-cyan"
+                          : "border-border bg-surface-2 text-foreground/80 hover:border-cyan/35 hover:text-cyan"
                       }`}
                     >
                       {skill.name}
@@ -61,7 +61,7 @@ export function SkillsSection() {
                           exit={{ opacity: 0, height: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="mt-1.5 border border-violet/30 bg-violet/8 px-3 py-2 font-mono text-[10px] text-violet">
+                          <div className="mt-1.5 border border-violet-500/20 bg-violet-500/5 rounded-lg px-3 py-1.5 font-mono text-[9px] text-violet-400">
                             {skill.projects.length
                               ? skill.projects.map(titleOf).join(" • ")
                               : "No linked project yet"}

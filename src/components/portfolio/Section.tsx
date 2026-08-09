@@ -23,12 +23,12 @@ export function Section({
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="mb-12"
       >
-        <div className="flex items-center gap-3 font-mono text-xs tracking-[0.35em] text-cyan/80">
-          <span className="h-px w-8 bg-cyan/60" />
-          {index} // {title.toUpperCase()}
+        <div className="flex items-center gap-2.5 font-mono text-[11px] tracking-[0.2em] text-cyan/85 uppercase">
+          <span className="h-px w-6 bg-cyan/40" />
+          {index} • {title}
         </div>
-        <h2 className="mt-4 text-3xl font-bold sm:text-5xl">
-          <span className="neon-text">{title}</span>
+        <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
+          {title}
         </h2>
         {subtitle && (
           <p className="mt-3 max-w-2xl text-base text-muted-foreground sm:text-lg">{subtitle}</p>

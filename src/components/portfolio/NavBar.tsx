@@ -89,9 +89,9 @@ export function NavBar() {
       <div className="glass mx-auto mt-3 flex w-[min(1100px,94vw)] items-center justify-between px-4 py-3">
         <button
           onClick={() => go("home")}
-          className="font-display text-sm font-bold tracking-[0.25em] text-cyan"
+          className="font-sans text-sm font-bold tracking-[0.12em] text-cyan hover:opacity-85 transition-opacity"
         >
-          RK//HQ
+          Rishant Kushwaha
         </button>
 
         <ul className="hidden items-center gap-1 lg:flex">

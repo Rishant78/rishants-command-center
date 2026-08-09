@@ -30,7 +30,7 @@ export function BootSequence({ onDone }: { onDone: () => void }) {
       transition={{ duration: 0.6 }}
     >
       <div className="grid-floor pointer-events-none absolute inset-0 opacity-40" />
-      <div className="scanlines relative w-full max-w-lg">
+      <div className="relative w-full max-w-lg">
         <div className="font-mono text-xs tracking-[0.4em] text-cyan/70">SYSTEM BOOT</div>
         <ul className="mt-6 space-y-3 font-mono text-sm sm:text-base">
           <AnimatePresence>
