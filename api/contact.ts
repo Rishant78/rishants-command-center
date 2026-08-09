@@ -1,42 +1,33 @@
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
 
-declare const process: {
-  env: {
-    RESEND_API_KEY?: string;
-  };
-};
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-export default async function handler(req: Request) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
-    return new Response(
-      JSON.stringify({ error: "Method not allowed" }),
-      {
-        status: 405,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
+    return res.status(405).json({
+      error: "Method not allowed",
+    });
   }
 
   try {
-    const { name, email, message } = await req.json();
+    const { name, email, message } = req.body ?? {};
 
     if (!name || !email || !message) {
-      return new Response(
-        JSON.stringify({
-          error: "Name, email, and message are required.",
-        }),
-        {
-          status: 400,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
+      return res.status(400).json({
+        error: "Name, email, and message are required.",
+      });
     }
+
+    const apiKey = process.env.RESEND_API_KEY;
+
+    if (!apiKey) {
+      console.error("RESEND_API_KEY is missing");
+
+      return res.status(500).json({
+        error: "Server email configuration is missing.",
+      });
+    }
+
+    const resend = new Resend(apiKey);
 
     const { data, error } = await resend.emails.send({
       from: "Rishant Portfolio <onboarding@resend.dev>",
@@ -55,44 +46,20 @@ ${message}
     if (error) {
       console.error("Resend error:", error);
 
-      return new Response(
-        JSON.stringify({
-          error: "Failed to send message.",
-        }),
-        {
-          status: 500,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
+      return res.status(500).json({
+        error: "Failed to send message.",
+      });
     }
 
-    return new Response(
-      JSON.stringify({
-        success: true,
-        data,
-      }),
-      {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
+    return res.status(200).json({
+      success: true,
+      data,
+    });
   } catch (error) {
     console.error("Contact form error:", error);
 
-    return new Response(
-      JSON.stringify({
-        error: "Something went wrong while sending the message.",
-      }),
-      {
-        status: 500,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
+    return res.status(500).json({
+      error: "Something went wrong while sending the message.",
+    });
   }
 }
