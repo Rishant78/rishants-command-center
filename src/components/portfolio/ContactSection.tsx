@@ -10,6 +10,7 @@ import {
   Loader2,
   AlertCircle,
 } from "lucide-react";
+
 import { profile } from "@/data/profile";
 import { Section } from "./Section";
 import { NeonButton } from "./NeonButton";
@@ -73,10 +74,38 @@ export function ContactSection() {
         }),
       });
 
-      const data = await response.json();
+      const contentType =
+        response.headers.get("content-type") || "";
+
+      let data: {
+        success?: boolean;
+        error?: string;
+      } | null = null;
+
+      if (contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+
+        console.error(
+          "Non-JSON response from server:",
+          response.status,
+          text,
+        );
+
+        throw new Error(
+          `Server returned an unexpected response (${response.status}).`,
+        );
+      }
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to send message.");
+        throw new Error(
+          data?.error || "Failed to send message.",
+        );
+      }
+
+      if (!data?.success) {
+        throw new Error("Message could not be sent.");
       }
 
       setSent(true);
@@ -101,11 +130,11 @@ export function ContactSection() {
   return (
     <Section
       id="contact"
-      index="07"
-      title="Contact"
-      subtitle="Have a project, opportunity, or idea? Let's connect."
+      index="06"
+      title="Let's build something together"
+      subtitle="Have a project, opportunity, or idea in mind? Feel free to reach out."
     >
-      <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+      <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
         {/* Contact Channels */}
         <motion.ul
           initial={{ opacity: 0, x: -24 }}
@@ -117,7 +146,9 @@ export function ContactSection() {
           {channels.map(({ icon: Icon, label, value, href }) => {
             const inner = (
               <>
-                <Icon size={20} className="shrink-0 text-cyan" />
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-cyan/20 bg-cyan/5 text-cyan">
+                  <Icon size={18} />
+                </div>
 
                 <div className="min-w-0">
                   <p className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
@@ -136,18 +167,22 @@ export function ContactSection() {
                 {href ? (
                   <a
                     href={href}
-                    target={href.startsWith("mailto:") ? undefined : "_blank"}
+                    target={
+                      href.startsWith("mailto:")
+                        ? undefined
+                        : "_blank"
+                    }
                     rel={
                       href.startsWith("mailto:")
                         ? undefined
                         : "noreferrer noopener"
                     }
-                    className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card/45 transition-all duration-300 hover:border-cyan/35 hover:shadow-[0_8px_30px_rgba(6,182,212,0.06)] hover:-translate-y-0.5"
+                    className="flex items-center gap-4 rounded-xl border border-border bg-card/45 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan/35 hover:shadow-[0_8px_30px_rgba(6,182,212,0.06)]"
                   >
                     {inner}
                   </a>
                 ) : (
-                  <div className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card/45">
+                  <div className="flex items-center gap-4 rounded-xl border border-border bg-card/45 p-4">
                     {inner}
                   </div>
                 )}
@@ -163,30 +198,43 @@ export function ContactSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, delay: 0.1 }}
-          className="glass space-y-4 p-6 rounded-2xl border border-border bg-card/45"
+          className="glass space-y-4 rounded-2xl border border-border bg-card/45 p-6"
         >
-          {[
-            { id: "name", label: "Name", type: "text" },
-            { id: "email", label: "Email", type: "email" },
-          ].map((f) => (
-            <div key={f.id}>
-              <label
-                htmlFor={f.id}
-                className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase"
-              >
-                {f.label}
-              </label>
+          <div>
+            <label
+              htmlFor="name"
+              className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase"
+            >
+              Name
+            </label>
 
-              <input
-                id={f.id}
-                name={f.id}
-                type={f.type}
-                required
-                disabled={sending}
-                className="mt-1.5 w-full rounded-lg border border-border bg-surface-2/40 px-3.5 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan focus:ring-1 focus:ring-cyan/20 disabled:cursor-not-allowed disabled:opacity-60"
-              />
-            </div>
-          ))}
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              disabled={sending}
+              className="mt-1.5 w-full rounded-lg border border-border bg-surface-2/40 px-3.5 py-2.5 text-sm text-foreground outline-none transition-all focus:border-cyan focus:ring-1 focus:ring-cyan/20 disabled:cursor-not-allowed disabled:opacity-60"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase"
+            >
+              Email
+            </label>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              disabled={sending}
+              className="mt-1.5 w-full rounded-lg border border-border bg-surface-2/40 px-3.5 py-2.5 text-sm text-foreground outline-none transition-all focus:border-cyan focus:ring-1 focus:ring-cyan/20 disabled:cursor-not-allowed disabled:opacity-60"
+            />
+          </div>
 
           <div>
             <label
@@ -202,7 +250,7 @@ export function ContactSection() {
               rows={5}
               required
               disabled={sending}
-              className="mt-1.5 w-full resize-none rounded-lg border border-border bg-surface-2/40 px-3.5 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan focus:ring-1 focus:ring-cyan/20 disabled:cursor-not-allowed disabled:opacity-60"
+              className="mt-1.5 w-full resize-none rounded-lg border border-border bg-surface-2/40 px-3.5 py-2.5 text-sm text-foreground outline-none transition-all focus:border-cyan focus:ring-1 focus:ring-cyan/20 disabled:cursor-not-allowed disabled:opacity-60"
             />
           </div>
 

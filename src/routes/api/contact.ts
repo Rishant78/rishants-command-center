@@ -13,9 +13,10 @@ export default async function handler(
   }
 
   try {
+    // Vercel automatically parses JSON request bodies
     const { name, email, message } = req.body;
 
-    // Validate form data
+    // Validate fields
     if (!name || !email || !message) {
       return res.status(400).json({
         error: "Name, email, and message are required.",
@@ -23,28 +24,29 @@ export default async function handler(
     }
 
     // Check API key
-    if (!process.env.RESEND_API_KEY) {
+    const apiKey = process.env.RESEND_API_KEY;
+
+    if (!apiKey) {
       console.error("RESEND_API_KEY is missing");
 
       return res.status(500).json({
-        error: "Server configuration error.",
+        error: "Server email configuration is missing.",
       });
     }
 
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(apiKey);
 
     const { data, error } = await resend.emails.send({
       from: "Rishant Portfolio <onboarding@resend.dev>",
       to: ["rikushwaha78.rk@gmail.com"],
       replyTo: email,
       subject: `New portfolio message from ${name}`,
-      text: `
-Name: ${name}
+      text: `Name: ${name}
+
 Email: ${email}
 
 Message:
-${message}
-      `,
+${message}`,
     });
 
     if (error) {
