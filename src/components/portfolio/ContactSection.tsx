@@ -1,15 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
-import {
-  Github,
-  Linkedin,
-  Mail,
-  MapPin,
-  Send,
-  Check,
-  Loader2,
-  AlertCircle,
-} from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Send, Check, Loader2, AlertCircle } from "lucide-react";
 
 import { profile } from "@/data/profile";
 import { Section } from "./Section";
@@ -74,8 +65,7 @@ export function ContactSection() {
         }),
       });
 
-      const contentType =
-        response.headers.get("content-type") || "";
+      const contentType = response.headers.get("content-type") || "";
 
       let data: {
         success?: boolean;
@@ -85,23 +75,13 @@ export function ContactSection() {
       if (contentType.includes("application/json")) {
         data = await response.json();
       } else {
-        const text = await response.text();
+        await response.text();
 
-        console.error(
-          "Non-JSON response from server:",
-          response.status,
-          text,
-        );
-
-        throw new Error(
-          `Server returned an unexpected response (${response.status}).`,
-        );
+        throw new Error(`Server returned an unexpected response (${response.status}).`);
       }
 
       if (!response.ok) {
-        throw new Error(
-          data?.error || "Failed to send message.",
-        );
+        throw new Error(data?.error || "Failed to send message.");
       }
 
       if (!data?.success) {
@@ -115,13 +95,7 @@ export function ContactSection() {
         setSent(false);
       }, 4000);
     } catch (err) {
-      console.error("Contact form error:", err);
-
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Something went wrong. Please try again.",
-      );
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setSending(false);
     }
@@ -155,9 +129,7 @@ export function ContactSection() {
                     {label}
                   </p>
 
-                  <p className="mt-1 truncate text-sm text-foreground">
-                    {value}
-                  </p>
+                  <p className="mt-1 truncate text-sm text-foreground">{value}</p>
                 </div>
               </>
             );
@@ -167,16 +139,8 @@ export function ContactSection() {
                 {href ? (
                   <a
                     href={href}
-                    target={
-                      href.startsWith("mailto:")
-                        ? undefined
-                        : "_blank"
-                    }
-                    rel={
-                      href.startsWith("mailto:")
-                        ? undefined
-                        : "noreferrer noopener"
-                    }
+                    target={href.startsWith("mailto:") ? undefined : "_blank"}
+                    rel={href.startsWith("mailto:") ? undefined : "noreferrer noopener"}
                     className="flex items-center gap-4 rounded-xl border border-border bg-card/45 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan/35 hover:shadow-[0_8px_30px_rgba(6,182,212,0.06)]"
                   >
                     {inner}

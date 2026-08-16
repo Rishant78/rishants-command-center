@@ -30,7 +30,7 @@ export const profile = {
     github: "https://github.com/Rishant78",
     linkedin: "https://www.linkedin.com/in/rishant-kushwaha-127a6a299/",
     email: "rikushwaha78.rk@gmail.com",
-    resume: "https://drive.google.com/file/d/1KZ4sTw0npQFbjcuENm3WYOItWfDBUCkK/view?usp=drive_link",
+    resume: "https://drive.google.com/file/d/1eVCIZdZV5IbnVFnpVWx9u1sZ_MqVy-E1/view?usp=drive_link",
     location: "Pokhara, Nepal",
   },
 } as const;

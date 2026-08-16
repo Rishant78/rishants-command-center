@@ -31,8 +31,9 @@ dist-ssr
 *.sln
 *.sw?
 
-#environment file
+# Environment files (the documented template is deliberately tracked).
 .env
-.env.local
+.env.*
+!.env.example
 
 .lovable/
